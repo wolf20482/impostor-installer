@@ -1,0 +1,15 @@
+[Unit]
+Description=Among Us private server implementation
+
+Wants=network.target
+After=syslog.target network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/impostor/Impostor.Server
+Restart=on-failure
+RestartSec=10
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
