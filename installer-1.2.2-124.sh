@@ -77,6 +77,10 @@ EOF
     sudo systemctl start impostor
 }
 
+AwaitInstallation() {
+    echo "Impostor will be installed in 10 seconds..."
+    sleep 10
+}
 # System messages
 __line="-----------------------------------------------"
 __welcomeascii="
@@ -116,31 +120,22 @@ echo "$__welcometext2"
 echo "$__welcometext3"
 echo "$__welcometext4"
 echo "$__welcometext5"
-
-while [ "$go" != 'y' ] && [ "$go" != 'n' ]
-do
-    read -p "$__confirmationPrompt" go;
-done
+read -p "$__confirmationPrompt" go;
 
 if [ "$go" == 'n' ];then
     exit;
 fi
-
-while [ "$build" != 'y' ] && [ "$build" != 'n' ]
-do
-    read -p "$__installationTypePrompt" build;
-done
+read -p "$__installationTypePrompt" build;
 
 if [ $server_ram_total -lt $low_ram ]; then
 	echo -e "Your RAM is too low for running Impostor properly. \n (at least 256MB) \n"
 	echo "Cancelling installation..."
 	exit
 fi
-sleep 3
-
-clear
 if [ "$build" == 'n' ];then
+    AwaitInstallation;
     PrecompiledInstallation;
 else
+    AwaitInstallation;
     BuildFromSource;
 fi
