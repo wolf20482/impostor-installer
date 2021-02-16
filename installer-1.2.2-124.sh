@@ -38,7 +38,7 @@ KillMode=process
 
 [Install]
 WantedBy=multi-user.target
-EOF 
+EOF
     sudo chmod 640 /etc/systemd/system/impostor.service
     sudo systemctl enable impostor
     sudo systemctl start impostor
@@ -71,7 +71,7 @@ KillMode=process
 
 [Install]
 WantedBy=multi-user.target
-EOF 
+EOF
     sudo chmod 640 /etc/systemd/system/impostor.service
     sudo systemctl enable impostor
     sudo systemctl start impostor
@@ -109,6 +109,7 @@ __installationTypePrompt="What method do you want to use to install Impostor?
 1. Download precompiled source code and run
 2. Build from source
 Please enter your choice. [1/2]"
+echo "$__line"
 tput setaf 1; echo "$__welcomeascii"
 echo "$__welcometext1"
 echo "$__welcometext2"
@@ -116,16 +117,16 @@ echo "$__welcometext3"
 echo "$__welcometext4"
 echo "$__welcometext5"
 
-while ["$go" != 'y'] && ["$go" != 'n']
+while [ "$go" != 'y' ] && [ "$go" != 'n' ]
 do
     read -p "$__confirmationPrompt" go;
 done
 
-if ["$go" == 'n'];then
+if [ "$go" == 'n' ];then
     exit;
 fi
 
-while ["$build" != 'y'] && ["$build" != 'n']
+while [ "$build" != 'y' ] && [ "$build" != 'n' ]
 do
     read -p "$__installationTypePrompt" build;
 done
@@ -138,7 +139,7 @@ fi
 sleep 3
 
 clear
-if ["$build" == 'n'];then
+if [ "$build" == 'n' ];then
     PrecompiledInstallation;
 else
     BuildFromSource;
